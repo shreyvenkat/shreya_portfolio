@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreya Venkataramana | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0f1f;
+      --bg2: #111827;
+      --card: rgba(255, 255, 255, 0.08);
+      --glass: rgba(255, 255, 255, 0.05);
+      --text: #f0f8ff;
+      --muted: #e0e7ff;
+      --accent1: #ff7ce5;
+      --accent2: #7df9ff;
+      --glow: 0 0 18px rgba(125, 249, 255, 0.55);
+      --radius: 16px;
+      --trans: 0.35s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, var(--bg2), var(--bg));
+      color: var(--text);
+      min-height: 100%;
+      font-size: 22px;
+      line-height: 2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Floating side shapes */
+    .shape-left, .shape-right {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(125, 249, 255, 0.15);
+      filter: blur(120px);
+      z-index: -1;
+    }
+    .shape-left { left: -150px; top: 20%; }
+    .shape-right { right: -150px; top: 60%; }
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 50px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 40px 0;
+    }
+
+    .brand-title {
+      font-size: 36px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn {
+      padding: 18px 32px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--trans);
+      font-size: 20px;
+      margin-top: 12px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #000;
+      box-shadow: var(--glow);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 40px;
+      padding: 60px;
+      background: var(--glass);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--glow);
+      animation: fadeUp 0.8s ease;
+      text-align: left;
+      color: var(--muted);
+    }
+
+    .hero h1 {
+      margin-top: 0;
+      font-size: 64px;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .hero p {
+      font-size: 24px;
+      color: var(--muted);
+      text-align: justify;
+    }
+
+    section {
+      margin-top: 80px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* PROJECT CARDS */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+    }
+
+    @media (max-width: 1400px) {
+      .projects {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: var(--trans);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      min-height: 300px;
+      color: var(--muted);
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--glow);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .card h3 {
+      margin: 0 0 16px 0;
+      font-size: 26px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card p {
+      font-size: 22px;
+      color: #d8e3ff;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* SKILLS */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: flex-start;
+    }
+
+    .badge {
+      padding: 14px 20px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      backdrop-filter: blur(6px);
+      font-size: 20px;
+      color: var(--text);
+      box-shadow: var(--glow);
+      transition: var(--trans);
+    }
+
+    .badge:hover {
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    /* EXPERIENCE */
+    .experience {
+      background: var(--card);
+      padding: 36px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    .experience h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 26px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .experience p {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating side shapes -->
+  <div class="shape-left"></div>
+  <div class="shape-right"></div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="brand-title">Shreya Venkataramana</div>
+      <button class="btn btn-primary" onclick="window.open('resume.pdf')">Resume</button>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>A Glimpse of Me</h1>
+      <p>
+        I’m Shreya, a data analytics and science enthusiast currently pursuing my Master’s in Data Science & Analytics at SMU, with hands-on experience in SQL, Data modelling, Python, Power BI and SAS Viya. Before transitioning into the data domain, I worked in automation-focused roles in Singapore, where I designed and implemented business application workflows. I’m driven by turning data into actionable insights and am actively exploring opportunities to apply my skills in real-world business environments.
+      </p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects">
+        <div class="card">
+          <div>
+            <h3>Singapore HDB Resale Price Analysis — Python & Visualization</h3>
+            <p>Analyzed Singapore HDB resale price trends using Python and Pandas, uncovering insights on price movements across towns, flat types, and time periods. Created visualizations with Seaborn and Matplotlib to highlight patterns, seasonal trends, and anomalies for actionable insights.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openPDF('reports/hdb_resale_analysis.pdf')">Click to view </button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Window Functions — MySQL Query Optimisation</h3>
+            <p>Performed data analysis using SQL on the Olist dataset to identify top-performing products across categories. Optimized queries using window functions, improving processing speed and providing actionable business insights.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openPDF('reports/window_functions.pdf')">Click to view </button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>FinAccess Kenya Survey 2024 — Data Analysis</h3>
+            <p>Analyzed the 2024 FinAccess Kenya survey data to uncover patterns in financial access and usage across demographics. Developed insights to support data-driven policy recommendations and understand gaps in financial inclusion.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openPDF('reports/finaccess.pdf')">Click to view</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Adidas Sales Analysis — Power BI</h3>
+            <p>Developed an interactive Power BI dashboard to explore Adidas sales in the USA, revealing insights on product-level performance, sales seasonality, and regional market variations.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openPDF('reports/adidas.pdf')">Click to view</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills">
+        <span class="badge">Python</span>
+        <span class="badge">Pandas</span>
+        <span class="badge">NumPy</span>
+        <span class="badge">Seaborn</span>
+        <span class="badge">Matplotlib</span>
+        <span class="badge">SQL</span>
+        <span class="badge">Power BI</span>
+        <span class="badge">Java</span>
+        <span class="badge">Machine Learning</span>
+        <span class="badge">ETL Pipeline</span>
+        <span class="badge">Data Analysis</span>
+        <span class="badge">Data Cleaning</span>
+        <span class="badge">Data Visualisation</span>
+        <span class="badge">Git</span>
+        <span class="badge">Snowflake</span>
+        <span class="badge">Automation Scripting</span>
+        <span class="badge">Selenium</span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="experience">
+        <h3>Automation Engineer</h3>
+        <p>
+          Leveraged expertise across Singapore and India as an Automation Engineer, Software Quality Specialist, and Automation Developer to architect and implement robust automation frameworks for banking and business applications. Streamlined workflows and analyzed data using SQL queries, integrating solutions with CI/CD pipelines to enhance efficiency and accuracy.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>© 2025 Shreya • Portfolio</footer>
+  </div>
+
+  <script>
+    function openPDF(url) {
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
